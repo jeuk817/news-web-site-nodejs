@@ -1,0 +1,12 @@
+extends sign
+
+block content
+    div(id="signUpContainer")
+        input(type="text" id="inputNewID" placeholder="아이디")
+        p(id="noteID")
+        input(type="submit" id="identification" value="ID중복확인")
+        input(type="password" id="inputNewPwd" placeholder="비밀번호")
+        input(type="password" id="confirmPassword" placeholder="비밀번호 확인")
+        p(id="notePwd")
+        input(type="submit" id="createID" value="계정생성")
+        input(type="button" id="backToLogin" value="로그인하러가기")

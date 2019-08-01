@@ -6,7 +6,7 @@ const inputNewPwd = document.getElementById('inputNewPwd');
 const confirmPassword = document.getElementById('confirmPassword');
 const notePwd = document.getElementById('notePwd');
 
-// 계정생성버튼 클릭 시 ID와 패스워드가 유효성검사를 모두 통과했는지 확인하고, 통과했다면 계정을 생성하는 이벤트
+// 계정생성버튼 클릭 시 ID와 패스워드가 유효성검사를 모두 통과했는지 확인하고, 통과했다면 계정을 생성하고 로그인페이지로 이동하는 이벤트
 createID.addEventListener('click', async (event) => {
     if (inputID.dataset.possible !== "yes" || inputNewPwd.dataset.possible !== 'yes') return alert('ID와 password가 유효한지 확인해주세요.')
     const id = inputID.value;

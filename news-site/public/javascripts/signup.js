@@ -7,14 +7,15 @@ const confirmPassword = document.getElementById('confirmPassword');
 const notePwd = document.getElementById('notePwd');
 
 createID.addEventListener('click', async (event) => {
-    const id = document.getElementById('inputNewID').value;
-    const pwd = document.getElementById('inputNewPwd').value;
-    console.log(id);
+    if (inputID.dataset.possible !== "yes" || inputNewPwd.dataset.possible !== 'yes') return alert('ID와 password가 유효한지 확인해주세요.')
+    const id = inputID.value;
+    const pwd = inputNewPwd.value;
     const response = await fetch('/users/signUp', {
         method: 'POST',
         body: JSON.stringify({ id, pwd }),
         headers: { "Content-Type": "application/json" }
     })
+    alert('계정이 생성되었습니다.')
 })
 
 // ID를 입력했을 때, 정규식을 이용해 입력된 아이디가 유효한지 검사하여 표시하는 이벤트
@@ -73,10 +74,12 @@ inputNewPwd.addEventListener('keyup', (event) => {
     notePwd.innerHTML = '사용가능한 비밀번호 입니다.';
 })
 
+// 비밀번호 확인란에 입력시 앞서 입력한 비밀번호와 일치여부를 확인하는 이벤트
 confirmPassword.addEventListener('keyup', (event) => {
     if (inputNewPwd.dataset.possible === 'no') {
         return notePwd.innerHTML = '사용불가능한 비밀번호입니다.';
     }
+    inputNewPwd.dataset.possible = 'yet';
     const pwdToConfirm = confirmPassword.value;
     if (pwdToConfirm !== inputNewPwd.value) {
         return notePwd.innerHTML = '비밀번호 불일치'

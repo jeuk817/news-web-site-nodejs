@@ -3,10 +3,13 @@ const noteID = document.getElementById('noteID');
 const identification = document.getElementById('identification');
 const inputID = document.getElementById('inputNewID');
 const inputNewPwd = document.getElementById('inputNewPwd');
+const confirmPassword = document.getElementById('confirmPassword');
+const notePwd = document.getElementById('notePwd');
 
 createID.addEventListener('click', async (event) => {
     const id = document.getElementById('inputNewID').value;
     const pwd = document.getElementById('inputNewPwd').value;
+    console.log(id);
     const response = await fetch('/users/signUp', {
         method: 'POST',
         body: JSON.stringify({ id, pwd }),
@@ -28,7 +31,7 @@ inputID.addEventListener('keyup', (event) => {
         return noteID.innerHTML = '숫자를  포함시켜 주세요.'
     }
     inputID.dataset.possible = "yet";
-    return noteID.innerHTML = 'ID중복검사를 해주세요.'
+    noteID.innerHTML = 'ID중복검사를 해주세요.'
 })
 
 // ID중복확인버튼 클릭시 서버와 통신하여 중복체크까지하여 표시하는 이벤트
@@ -51,4 +54,33 @@ identification.addEventListener('click', async (event) => {
     } catch (err) {
         throw err;
     }
+})
+
+// 영어 대,소문자, 숫자, 특수문자의 조합으로 8자이상의 비밀번호만 가능하도록하는 유효성검사 이벤트
+inputNewPwd.addEventListener('keyup', (event) => {
+    inputNewPwd.dataset.possible = 'no';
+    const pwdToCheck = inputNewPwd.value;
+    if (pwdToCheck.length < 8) {
+        return notePwd.innerHTML = '비밀번호를 최소 8자리 이상으로 입력해주세요.';
+    }
+    if (/ /.test(pwdToCheck)) {
+        return notePwd.innerHTML = '공백을 제거해주세요.';
+    }
+    if (!/[a-z]/.test(pwdToCheck) || !/[A-Z]/.test(pwdToCheck) || !/[0-9]/.test(pwdToCheck) || !/[~!@\#$%<>^&*]/.test(pwdToCheck)) {
+        return notePwd.innerHTML = '영어소문자, 영어대문자, 숫자, 특수문자가 각각 하나 이상 포함시켜주세요.';
+    }
+    inputNewPwd.dataset.possible = 'yet';
+    notePwd.innerHTML = '사용가능한 비밀번호 입니다.';
+})
+
+confirmPassword.addEventListener('keyup', (event) => {
+    if (inputNewPwd.dataset.possible === 'no') {
+        return notePwd.innerHTML = '사용불가능한 비밀번호입니다.';
+    }
+    const pwdToConfirm = confirmPassword.value;
+    if (pwdToConfirm !== inputNewPwd.value) {
+        return notePwd.innerHTML = '비밀번호 불일치'
+    }
+    inputNewPwd.dataset.possible = 'yes';
+    notePwd.innerHTML = '비밀번호 일치';
 })

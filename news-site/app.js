@@ -8,8 +8,10 @@ var flash = require('connect-flash');
 
 var indexRouter = require('./routes/index');
 var usersRouter = require('./routes/users');
+const connect = require('./schemas/index');
 
 var app = express();
+connect();
 
 // view engine setup
 app.set('views', path.join(__dirname, 'views'));

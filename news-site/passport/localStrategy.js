@@ -17,10 +17,10 @@ module.exports = passport => {
                 if (result) {
                     done(null, exUser);
                 } else {
-                    done(null, false, { message: '비밀번호가 일치하지 않습니다.' });
+                    done(null, false, { message: '비밀번호를 정확히 입력해주세요.' });
                 }
             } else {
-                done(null, false, { message: '없는 ID입니다.' })
+                done(null, false, { message: 'ID를 정확히 입력해주세요.' })
             }
         } catch (err) {
             console.error(err);

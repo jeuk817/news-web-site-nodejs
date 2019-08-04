@@ -14,7 +14,7 @@ router.get('/', (req, res, next) => {
 
 // 로그인페이지
 router.get('/loginPage', isNotLoggedIn, function (req, res, next) {
-  res.render('login');
+  res.render('login', { note: req.flash('message') });
 });
 
 // 회원가입페이지

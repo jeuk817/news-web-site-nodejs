@@ -48,6 +48,7 @@ router.post('/login', isNotLoggedIn, (req, res, next) => {
       return next(authError);
     }
     if (!user) {
+      if (info.message === 'Missing credentials') info.message = 'ID, password를 입력해주세요.'
       req.flash('message', info.message)
       return res.redirect('/loginPage');
     }

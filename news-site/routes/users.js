@@ -70,4 +70,17 @@ router.get('/logout', isLoggedIn, (req, res) => {
   res.redirect('/');
 });
 
+// 구글 로그인 시 실행
+// 유저의 프로파일을 가지고 passport/googleStrategy.js의 passport.use로 이동
+router.get('/google',
+  passport.authenticate('google', {
+    scope: ['profile']
+  })
+);
+
+router.get('/google/redirect', passport.authenticate('google'), (req, res, next) => {
+  console.log('gogle redirect')
+  res.redirect('/');
+});
+
 module.exports = router;

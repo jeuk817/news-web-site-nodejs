@@ -13,10 +13,11 @@ router.get('/', loginConfig, async (req, res, next) => {
 });
 
 // 홈페이지 테마뉴스 표시
-router.get('/thema/:thema', loginConfig, (req, res, next) => {
+router.get('/thema/:thema', loginConfig, async (req, res, next) => {
   console.log(req.params.thema, "thema");
+  const mainArticle = await newsEditor.getMainArticle();
   const articles = newsEditor.getArticles('해외');
-  res.render('homePage', { user: req.user, articles });
+  res.render('homePage', { user: req.user, articles, mainArticle });
 });
 
 // 로그인페이지

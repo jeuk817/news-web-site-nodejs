@@ -16,7 +16,7 @@ class NewsEditor {
 
     async getMainArticle() {
         try {
-            const mainArticle = await articleCollection.findById("5d68a77dc48d255ab881c4d5");
+            const mainArticle = await articleCollection.findById("5dc6e0286e62d551c695a99d");
             return mainArticle;
         } catch (err) {
             console.error(err);

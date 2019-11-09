@@ -89,7 +89,8 @@ p{
 #inputNewPwd,
 #confirmPassword,
 #createID,
-#backToLogin{
+#backToLogin,
+#inputNickname{
     width: 100%;
     height: 15%;
     border-top-right-radius: 27px;

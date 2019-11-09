@@ -1,20 +1,27 @@
 var express = require('express');
-const { isLoggedIn, isNotLoggedIn } = require('./middlewares');
+const { isLoggedIn, isNotLoggedIn, loginConfig } = require('./middlewares');
+const NewsEditor = require('../model/newsEditor');
+const newsEditor = new NewsEditor();
 
 var router = express.Router();
 
-// 홈페이지
-// 로그인상태가 아니면 homepage.pug를 render하고, 로그인상태면 loginedhome.pug를 출력합니다.
-router.get('/', (req, res, next) => {
-  if (req.isAuthenticated()) return next();
-  res.render('homepage');
-}, (req, res, next) => {
-  res.render('loginedhome', { user: req.user });
+// 홈페이지: 로그인상태라면 loginConfig혹은 passport에서 req.user에 유저정보가 담겨서 옵니다.
+router.get('/', loginConfig, async (req, res, next) => {
+  const mainArticle = await newsEditor.getMainArticle();
+  const articles = await newsEditor.getArticles('해외');
+  res.render('homePage', { user: req.user, articles, mainArticle });
+});
+
+// 홈페이지 테마뉴스 표시
+router.get('/thema/:thema', loginConfig, (req, res, next) => {
+  console.log(req.params.thema, "thema");
+  const articles = newsEditor.getArticles('해외');
+  res.render('homePage', { user: req.user, articles });
 });
 
 // 로그인페이지
 router.get('/loginPage', isNotLoggedIn, function (req, res, next) {
-  res.render('login', { note: req.flash('message') });
+  res.render('login', { note: req.flash('note') });
 });
 
 // 회원가입페이지

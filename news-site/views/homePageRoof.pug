@@ -1,0 +1,26 @@
+doctype html
+html
+  head
+    title= 'Circus News'
+    link(rel='stylesheet', href='/stylesheets/homepage.css')
+  body
+    header
+        div(id='areaRoof')
+          if user
+            a(href='http://localhost:3000/user' role='button')
+              div 마이페이지
+            a(href='http://localhost:3000/auth/logout')
+              div 로그아웃
+          else
+            a(href='http://localhost:3000/loginPage' role='button')
+                div(id='goLogin') 로그인
+        div(id='areaLogo')    
+          span Circus News
+        div(id='areaThemes')
+          a(href="http://localhost:3000") 홈
+          a(href="http://localhost:3000/thema/politics") 정치
+          a(href="http://localhost:3000/thema/economy") 경제
+          a(href="http://localhost:3000/thema/IT") IT
+          a(href="http://localhost:3000/thema/life") 생활
+          a(href="http://localhost:3000/thema/world") 세계
+    block content

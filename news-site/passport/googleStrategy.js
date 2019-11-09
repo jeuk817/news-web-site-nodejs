@@ -11,7 +11,7 @@ const UserCollection = require('../schemas/user');
 // 구글 로그인시 DB에 이미 저장되어있으면 그 정보를 가지고 로그인하고, 없으면 DB에 추가하고 로그인합니다.
 module.exports = passport => {
     passport.use(new GoogleStrategy({
-        callbackURL: '/users/google/redirect',
+        callbackURL: '/auth/google/redirect',
         clientID: process.env.MY_CLIENT_ID,
         clientSecret: process.env.MY_CLIENT_SECRET
     }, async (accessToken, refreshToken, profile, done) => {

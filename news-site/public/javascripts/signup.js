@@ -2,6 +2,7 @@ const createID = document.getElementById('createID');
 const noteID = document.getElementById('noteID');
 const identification = document.getElementById('identification');
 const inputID = document.getElementById('inputNewID');
+const inputNickname = document.getElementById('inputNickname');
 const inputNewPwd = document.getElementById('inputNewPwd');
 const confirmPassword = document.getElementById('confirmPassword');
 const notePwd = document.getElementById('notePwd');
@@ -10,21 +11,22 @@ const notePwd = document.getElementById('notePwd');
 createID.addEventListener('click', async (event) => {
     if (inputID.dataset.possible !== "yes" || inputNewPwd.dataset.possible !== 'yes') return alert('ID와 password가 유효한지 확인해주세요.')
     const id = inputID.value;
+    const displayName = inputNickname.value;
     const pwd = inputNewPwd.value;
-    alert('계정이 생성되었습니다.');
-    const response = await fetch('/users/signUp', {
+    const response = await fetch('/auth/signUp', {
         method: 'POST',
-        body: JSON.stringify({ id, pwd }),
+        body: JSON.stringify({ id, pwd, displayName }),
         headers: { "Content-Type": "application/json" }
     })
     if (response.redirected) {
+        alert('계정이 생성되었습니다.');
         window.location.href = response.url;
     }
 })
 
 // ID를 입력했을 때, 정규식을 이용해 입력된 아이디가 유효한지 검사하여 표시하는 이벤트
 inputID.addEventListener('keyup', (event) => {
-    idToCheck = inputID.value;
+    let idToCheck = inputID.value;
     inputID.dataset.possible = "no";
     if (!/^[a-z0-9+]{4,12}$/.test(idToCheck) || / /.test(idToCheck)) {
         return noteID.innerHTML = '공백없이 영소문자와 숫자로만 조합된 4~12글자 사이의 ID만 가능합니다.';
@@ -36,25 +38,38 @@ inputID.addEventListener('keyup', (event) => {
         return noteID.innerHTML = '숫자를  포함시켜 주세요.'
     }
     inputID.dataset.possible = "yet";
-    noteID.innerHTML = 'ID중복검사를 해주세요.'
+    noteID.innerHTML = '올바른 형식의 ID입니다. 중복체크를 해주세요.'
 })
 
-// ID중복확인버튼 클릭시 서버와 통신하여 중복체크까지하여 표시하는 이벤트
+// 닉네임 입력 시 최대 10글자까지 허용하도록 구현
+inputNickname.addEventListener('keyup', (event) => {
+    let nicknameToCheck = inputNickname.value;
+    inputNickname.dataset.possible = "no";
+    if (nicknameToCheck.length > 10) {
+        return noteID.innerHTML = '닉네임은 10글자를 넘길 수 없습니다.';
+    }
+    inputNickname.dataset.possible = "yet";
+    noteID.innerHTML = '올바른 형식의 닉네임입니다. 중복체크를 해주세요.'
+})
+
+// 중복체크 클릭시 서버와 통신하여 ID와 닉네임을 중복체크하여 표시하는 이벤트
 identification.addEventListener('click', async (event) => {
-    if (inputID.dataset.possible !== "yet") return;
+    if (inputID.dataset.possible !== "yet") return noteID.innerHTML = '올바른 형식의 ID를 입력해 주세요.'
+    if (inputNickname.dataset.possible !== "yet") return noteID.innerHTML = '올바른 형식의 닉네임를 입력해 주세요.'
     const idToCheck = inputID.value;
+    const nicknameToCheck = inputNickname.value;
     try {
-        const response = await fetch('/users/identification', {
+        const response = await fetch('/auth/identification', {
             method: 'POST',
-            body: JSON.stringify({ id: idToCheck }),
+            body: JSON.stringify({ id: idToCheck, displayName: nicknameToCheck }),
             headers: { "Content-Type": "application/json" }
         })
         const data = await response.text();
-        if (data === 'no') {
-            noteID.innerHTML = '이미 사용중인 ID입니다.';
-        } else {
+        if (data === 'Available') {
             inputID.dataset.possible = "yes";
-            noteID.innerHTML = '사용가능한 ID입니다.';
+            noteID.innerHTML = '중복체크완료';
+        } else {
+            noteID.innerHTML = data;
         }
     } catch (err) {
         throw err;

@@ -1,0 +1,14 @@
+extends homePageRoof
+
+block content
+    article
+        div(id="mainArticle")   
+            //- a(href=`http://localhost:3000/article/${mainArticle._id}` id="mainArticleLink")
+                div(id="mainPicture")
+                    img(src=`${mainArticle.pictureUrl}`)
+                if mainArticle.title.length > 25
+                    span(id="mainArticleTitle") #{mainArticle.title.substring(0,25)}...
+                else
+                    span(id="mainArticleTitle") #{mainArticle.title}
+                span(id="mainArticleContent") #{mainArticle.content.substring(0,120)}...
+        div(id="hotNews")

@@ -1,0 +1,38 @@
+extends homePageRoof
+
+block content
+    article
+        div(id="article")
+            div(id="articleHead")
+                div(id="articleTitle") #{article.title}
+                br
+                div(id="date") 기사입력일 #{article.createdAt.getFullYear()}년 #{article.createdAt.getMonth() + 1}월 #{article.createdAt.getDate()}일<br>최종수정일 #{article.updatedAt.getFullYear()}년 #{article.updatedAt.getMonth() + 1}월 #{article.updatedAt.getDate()}일
+            div(id="content")
+                div(id="picture")
+                    img(src=`${article.pictureUrl}`)
+                - const splitedContent = article.content.split('\r\n');
+                each sentence in splitedContent
+                    if sentence !== ''
+                        span= sentence
+                    br
+                br
+                div [#{article.reporterName} 기자]
+            ul(id="emotions")
+                li(id="good")
+                    input(type="button" class="emotion" id="goodBtn" value="좋아요")
+                    span(id="goodNum") #{article.emotions.good}
+                li(id="sad")
+                    input(type="button" class="emotion" id="sadBtn" value="슬퍼요")
+                    span(id="sadNum") #{article.emotions.sad}
+                li(id="angry")
+                    input(type="button" class="emotion" id="angryBtn" value="화나요")
+                    span(id="angryNum") #{article.emotions.angry}
+                li(id="want")
+                    input(type="button" class="emotion" id="wantBtn" value="궁금해요")
+                    span(id="wantNum") #{article.emotions.want}
+            div(id="commentField")
+                input(type="text" id="inputComment" placeholder="댓글을 입력하시려면 로그인해야합니다.")
+                input(type="button" id="commentSub" value="등록")
+            div(id="comments")
+                div 댓글이 입력될 곳입니다.
+    script(src="/javascripts/articleJs.js")

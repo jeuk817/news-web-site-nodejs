@@ -12,7 +12,20 @@ router.get('/:id', loginConfig, async (req, res, next) => {
 });
 
 router.post('/emotion', loginConfig, async (req, res, next) => {
-    const { emotion, _id, state } = req.body;
+    const { emotion, article_id, state } = req.body;
+
+    if(emotion === 'good'){
+        res.send('send')
+    } else {
+        res.redirect('/');
+
+    }
+    
+    // if(req.user){
+    //     console.log
+    // }
+    // console.log(emotion, article_id);
+    // console.log("user id : " + req.user._id)
     // const updatedNum = await newsEditor.updateEmotion(emotion, _id, state);
     // res.send(String(updatedNum));
 })

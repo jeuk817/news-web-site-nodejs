@@ -20,8 +20,6 @@ for (let i = 0; i < emotions.length; i++) {
             const choice = confirm('로그인 하신 후 이용해 주시기 바랍니다.');
             if (choice == true) {
                 window.location.href = response.url;
-              } else {
-                console.log('false')
               }
         } else {
             // 로그인 시

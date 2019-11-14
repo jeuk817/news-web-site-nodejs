@@ -18,17 +18,11 @@ const user = new Schema({
         type: String,
         default: 'local',
     },
-    record: {
-        comments: [{
-            article_Id: { type: mongoose.Schema.Types.ObjectId, ref: 'articles' },
-            index: [Number],
-
-        }],
-        good: [{ type: mongoose.Schema.Types.ObjectId, ref: 'articles' }],
-        sad: [{ type: mongoose.Schema.Types.ObjectId, ref: 'articles' }],
-        angry: [{ type: mongoose.Schema.Types.ObjectId, ref: 'articles' }],
-        want: [{ type: mongoose.Schema.Types.ObjectId, ref: 'articles' }],
-    },
+    comments: [{ type: mongoose.Schema.Types.ObjectId, ref: 'comments' }],
+    good: [{ type: mongoose.Schema.Types.ObjectId, ref: 'articles' }],
+    sad: [{ type: mongoose.Schema.Types.ObjectId, ref: 'articles' }],
+    angry: [{ type: mongoose.Schema.Types.ObjectId, ref: 'articles' }],
+    want: [{ type: mongoose.Schema.Types.ObjectId, ref: 'articles' }]
 })
 
-module.exports = mongoose.model('user', user, 'Users');
+module.exports = mongoose.model('user', user, 'users');

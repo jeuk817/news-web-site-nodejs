@@ -27,12 +27,10 @@ const article = new Schema({
         required: true,
     },
     comments: [{ type: mongoose.Schema.Types.ObjectId, ref: 'comments' }],
-    emotions: {
-        good: [{ type: mongoose.Schema.Types.ObjectId, ref: 'Users' }],
-        sad: [{ type: mongoose.Schema.Types.ObjectId, ref: 'Users' }],
-        angry: [{ type: mongoose.Schema.Types.ObjectId, ref: 'Users' }],
-        want: [{ type: mongoose.Schema.Types.ObjectId, ref: 'Users' }],
-    },
+    good: [{ type: mongoose.Schema.Types.ObjectId, ref: 'users' }],
+    sad: [{ type: mongoose.Schema.Types.ObjectId, ref: 'users' }],
+    angry: [{ type: mongoose.Schema.Types.ObjectId, ref: 'users' }],
+    want: [{ type: mongoose.Schema.Types.ObjectId, ref: 'users' }],
     hits: {
         type: Number,
         default: 0,

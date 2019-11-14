@@ -16,9 +16,6 @@ router.post('/emotion', loginConfig, async (req, res, next) => {
 
     if(emotion === 'good'){
         res.send('send')
-    } else {
-        res.redirect('/');
-
     }
     
     // if(req.user){

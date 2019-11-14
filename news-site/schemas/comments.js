@@ -4,19 +4,15 @@ const { Schema } = mongoose;
 const comment = new Schema({
     user_id: {
         type: mongoose.Schema.Types.ObjectId,
-        ref: 'Users',
-        required: true,
-    },
-    displayName: {
-        type: String,
+        ref: 'users',
         required: true,
     },
     content: {
         type: String,
         required: true,
     },
-    comments: [{ type: mongoose.Schema.Types.ObjectId, ref: 'comments', }],
-    deletion: {
+    comments: [{ type: mongoose.Schema.Types.ObjectId, ref: 'comments' }],
+    delete: {
         type: Boolean,
         default: false,
     },

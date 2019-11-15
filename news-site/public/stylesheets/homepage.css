@@ -19,6 +19,10 @@ body{
     border:2px solid red;
 }
 
+a {
+    text-decoration: none;
+}
+
 #areaRoof{
     border-bottom: 0.5px solid gray;
     display: flex;

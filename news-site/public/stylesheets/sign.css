@@ -26,6 +26,10 @@ header{
     margin-top: 5%;
 }
 
+a {
+    text-decoration: none;
+}
+
 h1{
     height: 70%;
     font-size: 4rem;

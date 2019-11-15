@@ -21,6 +21,14 @@ router.post('/emotion', loginConfig, async (req, res, next) => {
     // db에 감정표현을 업데이트하고 변경된 감정표현들의 수를 배열로 받는다.
     const updatedEmotions = await newsEditor.updateEmotion({article_id, user_id: req.user._id, emotion});
     res.send(updatedEmotions);
+});
+
+router.post('/comment', loginConfig, async (req, res, next) => {
+    // 비 로그인 상태일 때는 로그인페이지 url을 리다이렉트한다.
+    if(!req.user) return res.redirect('/loginPage');
+
+
+
 })
 
 module.exports = router;

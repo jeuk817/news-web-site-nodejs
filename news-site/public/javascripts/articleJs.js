@@ -13,6 +13,12 @@ function changeEmotionNum(numArr){
     }
 }
 
+// 비 로그인시 로그인권유
+function confirmLogin(url){
+    const choice = confirm('로그인 하신 후 이용해 주시기 바랍니다.');
+    if (choice == true) window.location.href = url;
+}
+
 for (let i = 0; i < emotions.length; i++) {
     emotions[i].addEventListener('click', async (event) => {
         const emotion = event.target.parentNode.id;
@@ -23,31 +29,23 @@ for (let i = 0; i < emotions.length; i++) {
             headers: { "Content-Type": "application/json" }
         })
         // 비 로그인 시에는 서버에서 리다이렉트가 온다.
-        if (response.redirected) {
-            // 서버로부터 로그인페이지의 url이 리다이렉트된다.
-            const choice = confirm('로그인 하신 후 이용해 주시기 바랍니다.');
-            if (choice == true) {
-                window.location.href = response.url;
-              }
-        } else {
-            // 로그인 시 감정표현이 허용된다.
-            // 서버에서 바뀐 감정표현의 수를 배열로 전달받는다.
-            const numArr = await response.json();
-            changeEmotionNum(numArr);
-        }
+        if(response.redirected) return confirmLogin(response.url);
+
+        // 로그인 시 감정표현이 허용된다.
+        // 서버에서 바뀐 감정표현의 수를 배열로 전달받는다.
+        const numArr = await response.json();
+        changeEmotionNum(numArr);
     })
 }
 
 commentSub.addEventListener('click', async (event) => {
-    const _id = document.URL.split('/').pop();
-    const response = await fetch('/article/emotion', {
+    const article_id = document.URL.split('/').pop();
+    const response = await fetch('/article/comment', {
         method: 'POST',
-        body: JSON.stringify({ emotion, _id, state: event.target.classList.length }),
+        body: JSON.stringify({ article_id }),
         headers: { "Content-Type": "application/json" }
     })
     const updatedNum = await response.text();
-    if (response.ok) {
-        // document.getElementById(`${emotion}Num`).textContent = updatedNum;
-        event.target.classList.toggle('done')
-    }
+    if(response.redirected) return confirmLogin(response.url);
+    
 })

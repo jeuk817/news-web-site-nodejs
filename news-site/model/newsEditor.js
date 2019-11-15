@@ -66,7 +66,7 @@ class NewsEditor {
         }
     }
 
-    // 이거하고 감정표현 유저스키마에도 저장하는 작업해야함
+    // 댓글 저장
     async createComment({article_id, user_id, content}){
         try{
             let newComment = new commentCollection({

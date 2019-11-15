@@ -2,6 +2,7 @@ const goodBtn = document.getElementById("goodBtn");
 const sadBtn = document.getElementById("sadBtn");
 const angryBtn = document.getElementById("angryBtn");
 const wantBtn = document.getElementById("wantBtn");
+const inputComment = document.getElementById("inputComment");
 const commentSub = document.getElementById("commentSub");
 const emotions = document.getElementsByClassName("emotion");
 const emotionNum = document.getElementsByClassName("emotionNum");
@@ -42,10 +43,11 @@ commentSub.addEventListener('click', async (event) => {
     const article_id = document.URL.split('/').pop();
     const response = await fetch('/article/comment', {
         method: 'POST',
-        body: JSON.stringify({ article_id }),
+        body: JSON.stringify({ article_id, content: inputComment.value }),
         headers: { "Content-Type": "application/json" }
     })
-    const updatedNum = await response.text();
+
     if(response.redirected) return confirmLogin(response.url);
     
+    const updatedNum = await response.text();
 })

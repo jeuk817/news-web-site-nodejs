@@ -27,7 +27,8 @@ router.post('/comment', loginConfig, async (req, res, next) => {
     // 비 로그인 상태일 때는 로그인페이지 url을 리다이렉트한다.
     if(!req.user) return res.redirect('/loginPage');
 
-
+    const {article_id, content} = req.body;
+    await newsEditor.createComment({article_id, user_id: req.user._id, content});
 
 })
 

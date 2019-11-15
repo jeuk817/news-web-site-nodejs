@@ -11,20 +11,16 @@ router.get('/:id', loginConfig, async (req, res, next) => {
     res.render('article', { user: req.user, article });
 });
 
+// 사용자가 감정표현을 클릭했을 때 실행
 router.post('/emotion', loginConfig, async (req, res, next) => {
-    const { emotion, article_id, state } = req.body;
+    // 비 로그인 상태일 때는 로그인페이지 url을 리다이렉트한다.
+    if(!req.user) return res.redirect('/loginPage');
 
-    if(emotion === 'good'){
-        res.send('send')
-    }
-    
-    // if(req.user){
-    //     console.log
-    // }
-    // console.log(emotion, article_id);
-    // console.log("user id : " + req.user._id)
-    // const updatedNum = await newsEditor.updateEmotion(emotion, _id, state);
-    // res.send(String(updatedNum));
+    // 사용자가 클릭한 감정표현과 기사의 _id를 받는다.
+    const { emotion, article_id } = req.body;
+    // db에 감정표현을 업데이트하고 변경된 감정표현들의 수를 배열로 받는다.
+    const updatedEmotions = await newsEditor.updateEmotion({article_id, user_id: req.user._id, emotion});
+    res.send(updatedEmotions);
 })
 
 module.exports = router;

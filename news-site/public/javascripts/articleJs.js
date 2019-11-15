@@ -4,6 +4,14 @@ const angryBtn = document.getElementById("angryBtn");
 const wantBtn = document.getElementById("wantBtn");
 const commentSub = document.getElementById("commentSub");
 const emotions = document.getElementsByClassName("emotion");
+const emotionNum = document.getElementsByClassName("emotionNum");
+
+// 감정표현의 수를 배열형태로 매개변수로 받는다. 그리고 그걸 화면에 반영하는 함수다.
+function changeEmotionNum(numArr){
+    for(let i = 0; i < emotionNum.length; i++){
+        emotionNum[i].textContent = numArr[i];
+    }
+}
 
 for (let i = 0; i < emotions.length; i++) {
     emotions[i].addEventListener('click', async (event) => {
@@ -14,15 +22,18 @@ for (let i = 0; i < emotions.length; i++) {
             body: JSON.stringify({ emotion, article_id }),
             headers: { "Content-Type": "application/json" }
         })
-        // 비 로그인시 리다이렉트하여 로그인페이지로 넘기고 아닐시 감정표현을 할 수 있도록 if로 구분할 것이다.
+        // 비 로그인 시에는 서버에서 리다이렉트가 온다.
         if (response.redirected) {
-            // 비 로그인 시
+            // 서버로부터 로그인페이지의 url이 리다이렉트된다.
             const choice = confirm('로그인 하신 후 이용해 주시기 바랍니다.');
             if (choice == true) {
                 window.location.href = response.url;
               }
         } else {
-            // 로그인 시
+            // 로그인 시 감정표현이 허용된다.
+            // 서버에서 바뀐 감정표현의 수를 배열로 전달받는다.
+            const numArr = await response.json();
+            changeEmotionNum(numArr);
         }
     })
 }
@@ -36,7 +47,7 @@ commentSub.addEventListener('click', async (event) => {
     })
     const updatedNum = await response.text();
     if (response.ok) {
-        document.getElementById(`${emotion}Num`).textContent = updatedNum;
+        // document.getElementById(`${emotion}Num`).textContent = updatedNum;
         event.target.classList.toggle('done')
     }
 })

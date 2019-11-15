@@ -20,16 +20,16 @@ block content
             ul(id="emotions")
                 li(id="good")
                     input(type="button" class="emotion" id="goodBtn" value="좋아요")
-                    span(id="goodNum") #{article.emotions.good}
+                    span(class="emotionNum" id="goodNum") #{article.good.length}
                 li(id="sad")
                     input(type="button" class="emotion" id="sadBtn" value="슬퍼요")
-                    span(id="sadNum") #{article.emotions.sad}
+                    span(class="emotionNum" id="sadNum") #{article.sad.length}
                 li(id="angry")
                     input(type="button" class="emotion" id="angryBtn" value="화나요")
-                    span(id="angryNum") #{article.emotions.angry}
+                    span(class="emotionNum" id="angryNum") #{article.angry.length}
                 li(id="want")
                     input(type="button" class="emotion" id="wantBtn" value="궁금해요")
-                    span(id="wantNum") #{article.emotions.want}
+                    span(class="emotionNum" id="wantNum") #{article.want.length}
             div(id="commentField")
                 input(type="text" id="inputComment" placeholder="댓글을 입력하시려면 로그인해야합니다.")
                 input(type="button" id="commentSub" value="등록")

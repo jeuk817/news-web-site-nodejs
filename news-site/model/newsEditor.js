@@ -12,7 +12,6 @@ class NewsEditor {
             const life = await this.getArticlesByThema('life');
             const world = await this.getArticlesByThema('world');
             const articles = { politics, economy, IT, life, world };
-            console.log(articles);
             return articles;
         } catch (err) {
             console.error(err);
@@ -23,7 +22,6 @@ class NewsEditor {
     async getArticlesByThema(thema) {
         try {
             const articles = await articleCollection.find({thema}).populate('comments').populate('reporterId').lean();
-            console.log(articles);
             return articles;
         } catch (err) {
             console.error(err);

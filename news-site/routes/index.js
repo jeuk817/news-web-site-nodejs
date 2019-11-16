@@ -15,8 +15,8 @@ router.get('/', loginConfig, async (req, res, next) => {
 // 홈페이지 테마뉴스 표시
 router.get('/thema/:thema', loginConfig, async (req, res, next) => {
   const mainArticle = await newsEditor.getMainArticle();
-  const articles = await newsEditor.getArticlesByThema('life');
-  res.render('homePage', { user: req.user, articles, mainArticle });
+  const articles = await newsEditor.getArticlesByThema(req.params.thema);
+  res.render('articlesByThema', { user: req.user, articles, mainArticle, thema: req.params.thema });
 });
 
 // 로그인페이지

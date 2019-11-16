@@ -11,7 +11,7 @@ const comment = new Schema({
         type: String,
         required: true,
     },
-    comments: [{ type: mongoose.Schema.Types.ObjectId, ref: 'comments' }],
+    comments: [{ type: mongoose.Schema.Types.ObjectId, ref: 'comment' }],
     delete: {
         type: Boolean,
         default: false,

@@ -18,7 +18,7 @@ const user = new Schema({
         type: String,
         default: 'local',
     },
-    comments: [{ type: mongoose.Schema.Types.ObjectId, ref: 'comments' }]
+    comments: [{ type: mongoose.Schema.Types.ObjectId, ref: 'comment' }]
 })
 
 module.exports = mongoose.model('user', user, 'users');

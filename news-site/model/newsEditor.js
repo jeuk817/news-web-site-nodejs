@@ -57,9 +57,7 @@ class NewsEditor {
             const emotions = ['good', 'sad', 'angry', 'want'];
             let article = await this.getArticleById(article_id);
             let updatedArticle = this.selectEmotion({article, user_id, emotion, emotions});
-            await updatedArticle.save(function(err){
-                if(err) return console.error(err);
-            });
+            await updatedArticle.save();
             return emotions.map(_emotion => updatedArticle[_emotion].length);
         } catch (err) {
             return err;
@@ -73,22 +71,18 @@ class NewsEditor {
                 user_id,
                 content
             });
-            await newComment.save(function(err){
-                if(err) return console.error(err);
-            });
-
-            const article = await this.getArticleById(article_id);
-            article.comments.push(newComment._id);
-            await article.save(function(err){
-                if(err) return console.error(err);
-            });
+            await newComment.save();
 
             const user = await userCollection.findById(user_id);
-            user.comments.push(newComment._id);
-            await user.save(function(err){
-                if(err) return console.error(err);
-            });
+            user.comments.unshift(newComment._id);
+            await user.save();
 
+            const article = await articleCollection.findById(article_id).populate('comments');
+            article.comments.unshift(newComment._id);
+            await article.save();
+
+            const updatedArticle = await articleCollection.findById(article_id).populate('comments').lean();
+            
         } catch(err){
             return err;
         }

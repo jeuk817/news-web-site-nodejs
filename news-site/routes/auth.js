@@ -4,8 +4,10 @@ const passport = require('passport');
 const jwt = require('jsonwebtoken');
 const bcrypt = require('bcrypt');
 
-const { isLoggedIn, isNotLoggedIn } = require('./middlewares');
+const { loginConfig, isLoggedIn, isNotLoggedIn } = require('./middlewares');
 const UserCollection = require('../schemas/user');
+const UserEditor = require('../model/userEditor');
+const userEditor = new UserEditor();
 
 router.get('/', function (req, res, next) {
   res.send('respond with a resource');
@@ -104,5 +106,20 @@ router.get('/google/redirect', passport.authenticate('google'), (req, res, next)
   console.log('gogle redirect')
   res.redirect('/');
 });
+
+router.get('/withdrawal', loginConfig, async (req,res,next) => {
+  try {
+    await userEditor.removeUser(req.user._id);
+    req.logout();
+    req.session.destroy();
+    res.clearCookie('token', { path: '/' });
+    res.clearCookie('connect.sid', { path: '/' });
+    res.redirect('/');
+  } catch(err){
+    console.log(err);
+    next(err);
+  }
+  
+})
 
 module.exports = router;

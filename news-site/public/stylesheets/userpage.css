@@ -1,0 +1,42 @@
+* {
+    box-sizing: border-box;
+}
+
+html,
+body {
+    padding: 0;
+    margin: 0;
+}
+
+html{
+    display:flex;
+    justify-content: center;
+}
+
+body{
+    width: 1300px;
+    height: 100%;
+    border:2px solid red;
+}
+
+a {
+    text-decoration: none;
+}
+
+#areaRoof{
+    border-bottom: 0.5px solid gray;
+    display: flex;
+    justify-content: flex-end;
+    font-size: 1.2rem;
+}
+
+#areaLogo{
+    margin: 0;
+    border-bottom: 2px solid #af242c;
+    font-size: 4rem;
+    font-weight: bold;
+}
+
+#withdrawal{
+    cursor: pointer;
+}

@@ -1,17 +1,8 @@
-doctype html
-html
-  head
-    title= 'Circus News'
-    link(rel='stylesheet', href='/stylesheets/homepage.css')
-  body
-    header
-        div(id='areaRoof')
-          a(href='http://localhost:3000/user' role='button')
-            div #{user.displayName}님
-          a(href='http://localhost:3000/auth/logout')
-            div 로그아웃
-        div(id='areaLogo')    
-          h1 Circus News
-    article
-        a(href='http://localhost:3000/text' role='button')
-            div 기사쓰기
+extends userPageRoof
+
+block content
+  a(href='http://localhost:3000/text' role='button')
+    div 기사쓰기
+  //- input(type="button" id="withdrawal" value="회원탈퇴")
+  div(id="withdrawal") 회원탈퇴
+  script(src="/javascripts/userPageJs.js")

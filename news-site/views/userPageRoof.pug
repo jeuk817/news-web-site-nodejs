@@ -1,0 +1,17 @@
+doctype html
+html
+  head
+    title= 'Circus News'
+    link(rel='stylesheet', href='/stylesheets/userpage.css')
+  body
+    header
+      div(id='areaRoof')
+        a(href='http://localhost:3000/user' role='button')
+          div #{user.displayName}님
+        a(href='http://localhost:3000/auth/logout')
+          div 로그아웃
+      div(id='areaLogo')
+        a(href="http://localhost:3000")
+          h1 Circus News
+    article
+      block content

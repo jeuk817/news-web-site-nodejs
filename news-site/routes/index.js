@@ -8,15 +8,14 @@ var router = express.Router();
 // 홈페이지: 로그인상태라면 loginConfig혹은 passport에서 req.user에 유저정보가 담겨서 옵니다.
 router.get('/', loginConfig, async (req, res, next) => {
   const mainArticle = await newsEditor.getMainArticle();
-  const articles = await newsEditor.getArticles('해외');
+  const articles = await newsEditor.getAllArticles();
   res.render('homePage', { user: req.user, articles, mainArticle });
 });
 
 // 홈페이지 테마뉴스 표시
 router.get('/thema/:thema', loginConfig, async (req, res, next) => {
-  console.log(req.params.thema, "thema");
   const mainArticle = await newsEditor.getMainArticle();
-  const articles = newsEditor.getArticles('해외');
+  const articles = await newsEditor.getArticlesByThema('life');
   res.render('homePage', { user: req.user, articles, mainArticle });
 });
 

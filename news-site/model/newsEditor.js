@@ -4,9 +4,25 @@ const commentCollection = require('../schemas/comments');
 
 class NewsEditor {
 
-    async getArticles(thema) {
+    async getAllArticles() {
         try {
-            const articles = await articleCollection.find({ thema });
+            const politics = await this.getArticlesByThema('politics');
+            const economy = await this.getArticlesByThema('economy');
+            const IT = await this.getArticlesByThema('IT');
+            const life = await this.getArticlesByThema('life');
+            const world = await this.getArticlesByThema('world');
+            const articles = { politics, economy, IT, life, world };
+            console.log(articles);
+            return articles;
+        } catch (err) {
+            console.error(err);
+            return err;
+        }
+    }
+
+    async getArticlesByThema(thema) {
+        try {
+            const articles = await articleCollection.find({thema}).populate('comments').populate('reporterId').lean();
             console.log(articles);
             return articles;
         } catch (err) {

@@ -6,7 +6,8 @@ const { Schema } = mongoose;
 // 기자_id, 기자이름, 테마, 제목, 사진, 내용, 댓글, 감정표현, 조회수, 작성일, 수정일
 const article = new Schema({
     reporterId: {
-        type: String,
+        type: mongoose.Schema.Types.ObjectId,
+        ref: 'user',
         required: true,
     },
     reporterName: {

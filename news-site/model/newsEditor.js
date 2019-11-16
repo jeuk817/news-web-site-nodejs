@@ -65,10 +65,11 @@ class NewsEditor {
     }
 
     // 댓글 저장
-    async createComment({article_id, user_id, content}){
+    async createComment({article_id, user_id, content, displayName}){
         try{
             let newComment = new commentCollection({
                 user_id,
+                displayName,
                 content
             });
             await newComment.save();
@@ -81,7 +82,7 @@ class NewsEditor {
             article.comments.unshift(newComment._id);
             await article.save();
 
-            const updatedArticle = await articleCollection.findById(article_id).populate('comments').lean();
+            const updatedArticle = await articleCollection.findById(article_id).populate('comments').populate('user_id').lean();
             return updatedArticle.comments;
         } catch(err){
             return err;

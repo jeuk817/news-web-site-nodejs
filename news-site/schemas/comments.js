@@ -7,6 +7,10 @@ const comment = new Schema({
         ref: 'users',
         required: true,
     },
+    displayName: {
+        type: String,
+        required: true,
+    },
     content: {
         type: String,
         required: true,

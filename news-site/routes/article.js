@@ -28,7 +28,7 @@ router.post('/comment', loginConfig, async (req, res, next) => {
     if(!req.user) return res.redirect('/loginPage');
 
     const {article_id, content} = req.body;
-    const updatedCommentsObject = await newsEditor.createComment({article_id, user_id: req.user._id, content});
+    const updatedCommentsObject = await newsEditor.createComment({article_id, user_id: req.user._id, content, displayName: req.user.displayName});
     res.json(updatedCommentsObject);
 })
 

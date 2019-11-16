@@ -4,6 +4,7 @@ const angryBtn = document.getElementById("angryBtn");
 const wantBtn = document.getElementById("wantBtn");
 const inputComment = document.getElementById("inputComment");
 const commentSub = document.getElementById("commentSub");
+const comments = document.getElementById("comments");
 const emotions = document.getElementsByClassName("emotion");
 const emotionNum = document.getElementsByClassName("emotionNum");
 
@@ -20,6 +21,41 @@ function confirmLogin(url){
     if (choice == true) window.location.href = url;
 }
 
+function createDiv({className, text}){
+    let div = document.createElement("div");
+    div.className = className;
+    let textnode = document.createTextNode(text);
+    div.appendChild(textnode);
+    return div;
+}
+
+function createInput({className, type, value}){
+    let input = document.createElement("input");
+    input.className = className;
+    input.type = type;
+    input.value = value;
+    return input;
+}
+
+function createComment({displayName, createdAt, content}){
+    let li = document.createElement("LI");
+    li.className = "commentBox";
+
+    let divCommentUser = createDiv({className: "commentUser", text: displayName});
+    let divCommentDate = createDiv({className: "commentDate", text: createdAt});
+    let divCommentContent = createDiv({className: "commentContent", text: content});
+    let inputRecommentBtn = createInput({className: "recommentBtn", type: "button", value: "답글작성"});
+    let inputCommentDelete = createInput({className: "commentDelete", type: "button", value: "삭제"});
+
+    li.appendChild(divCommentUser);
+    li.appendChild(divCommentDate);
+    li.appendChild(divCommentContent);
+    li.appendChild(inputRecommentBtn);
+    li.appendChild(inputCommentDelete);
+    comments.appendChild(li);
+}
+
+// 감정표현
 for (let i = 0; i < emotions.length; i++) {
     emotions[i].addEventListener('click', async (event) => {
         const emotion = event.target.parentNode.id;
@@ -39,6 +75,7 @@ for (let i = 0; i < emotions.length; i++) {
     })
 }
 
+// 댓글작성
 commentSub.addEventListener('click', async (event) => {
     const article_id = document.URL.split('/').pop();
     const response = await fetch('/article/comment', {
@@ -50,5 +87,10 @@ commentSub.addEventListener('click', async (event) => {
     if(response.redirected) return confirmLogin(response.url);
     
     const updatedCommentsObject = await response.json();
-    console.log(updatedCommentsObject);
+    inputComment.value = '';
+    comments.innerHTML = '';
+    updatedCommentsObject.forEach(comment => {
+        createComment({displayName: comment.displayName, createdAt: comment.displayName, content: comment.content});
+    });
+
 })

@@ -34,4 +34,11 @@ block content
                 input(type="text" id="inputComment" placeholder="댓글을 입력하시려면 로그인해야합니다.")
                 input(type="button" id="commentSub" value="등록")
             div(id="comments")
+                each comment in article.comments
+                    li(class="commentBox")
+                        div(class="commentUser")= comment.displayName
+                        div(class="commentDate")= comment.createdAt
+                        div(class="commentContent")= comment.content
+                        input(type="button" class="recommentBtn" value="답글작성")
+                        input(type="button" class="commentDelete" value="삭제")
     script(src="/javascripts/articleJs.js")

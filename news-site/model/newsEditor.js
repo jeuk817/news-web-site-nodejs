@@ -27,7 +27,7 @@ class NewsEditor {
 
     async getArticleById(id) {
         try {
-            const article = await articleCollection.findById(id);
+            const article = await articleCollection.findById(id).populate('comments').lean();
             return article;
         } catch (err) {
             console.error(err);
@@ -55,7 +55,7 @@ class NewsEditor {
     async updateEmotion({article_id, user_id, emotion}) {
         try {
             const emotions = ['good', 'sad', 'angry', 'want'];
-            let article = await this.getArticleById(article_id);
+            let article = await articleCollection.findById(article_id);
             let updatedArticle = this.selectEmotion({article, user_id, emotion, emotions});
             await updatedArticle.save();
             return emotions.map(_emotion => updatedArticle[_emotion].length);

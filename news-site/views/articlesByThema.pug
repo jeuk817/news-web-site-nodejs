@@ -1,0 +1,26 @@
+extends homePageRoof
+
+block content
+    article
+        div(id="mainArticle")   
+            a(href=`http://localhost:3000/article/${mainArticle._id}` id="mainArticleLink")
+                div(id="mainPicture")
+                    img(src=`${mainArticle.pictureUrl}`)
+                if mainArticle.title.length > 25
+                    span(id="mainArticleTitle") #{mainArticle.title.substring(0,25)}...
+                else
+                    span(id="mainArticleTitle") #{mainArticle.title}
+                span(id="mainArticleContent") #{mainArticle.content.substring(0,120)}...
+        div(id="articles") #{thema}
+            div(class="thema") 
+                br
+                each article in articles
+                    a(href=`http://localhost:3000/article/${article._id}`)
+                        if article.title.length > 25
+                            span(class="articleTitle") #{article.title.substring(0,25)}...
+                            span(class="reporterName") [#{article.reporterId.displayName} 기자]
+                        else
+                            span(class="articleTitle") #{article.title}
+                            span(class="reporterName") [#{article.reporterId.displayName} 기자]
+                    br
+        div(id="hotNews")

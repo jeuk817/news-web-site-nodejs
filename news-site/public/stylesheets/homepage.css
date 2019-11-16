@@ -148,5 +148,34 @@ img{
 #comments{
     margin: 50px;
     display: flex;
-    justify-content: flex-start;
+    flex-direction: column;
+}
+
+.commentBox {
+    list-style: none;
+    border-bottom: 1px groove gray;
+    width: 100%;
+    padding: 10px;
+}
+
+.commentUser,
+.commentDate,
+.commentContent,
+.recommentBtn,
+.commentDelete {
+    margin: 5px;
+}
+
+.commentUser {
+    font-weight: bold;
+    font-size: 20px;
+}
+
+.commentDate {
+    font-size: 15px;
+    color: gray;
+}
+
+.commentContent {
+    font-size: 15px;
 }

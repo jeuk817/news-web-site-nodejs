@@ -49,5 +49,6 @@ commentSub.addEventListener('click', async (event) => {
 
     if(response.redirected) return confirmLogin(response.url);
     
-    const updatedNum = await response.text();
+    const updatedCommentsObject = await response.json();
+    console.log(updatedCommentsObject);
 })

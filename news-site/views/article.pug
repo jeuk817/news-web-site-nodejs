@@ -34,5 +34,22 @@ block content
                 input(type="text" id="inputComment" placeholder="댓글을 입력하시려면 로그인해야합니다.")
                 input(type="button" id="commentSub" value="등록")
             div(id="comments")
-                div 댓글이 입력될 곳입니다.
+                li(class="commentBox")
+                    div(class="commentUser") circus
+                    div(class="commentDate")    1234
+                    div(class="commentContent") comment content
+                    input(type="button" class="recommentBtn" value="답글작성")
+                    input(type="button" class="commentDelete" value="삭제")
+                li(class="commentBox")
+                    div(class="commentUser") circus2
+                    div(class="commentDate")    1234
+                    div(class="commentContent") comment content2
+                    input(type="button" class="recommentBtn" value="답글작성")
+                    input(type="button" class="commentDelete" value="삭제")
+                li(class="commentBox")
+                    div(class="commentUser") circus3
+                    div(class="commentDate")    1234
+                    div(class="commentContent") comment content3
+                    input(type="button" class="recommentBtn" value="답글작성")
+                    input(type="button" class="commentDelete" value="삭제")
     script(src="/javascripts/articleJs.js")

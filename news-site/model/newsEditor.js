@@ -82,7 +82,7 @@ class NewsEditor {
             await article.save();
 
             const updatedArticle = await articleCollection.findById(article_id).populate('comments').lean();
-            
+            return updatedArticle.comments;
         } catch(err){
             return err;
         }

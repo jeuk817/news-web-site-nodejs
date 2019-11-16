@@ -54,10 +54,18 @@ article{
     flex-direction: column;
 }
 
+#localLoginArea{
+    height: 85%;
+}
+
+#googleLoginArea{
+    height: 15%;
+}
+
 #inputID,
 #inputPwd{
     width: 100%;
-    height: 20%;
+    height: 15%;
     border-top-right-radius: 27px;
     border-bottom-right-radius: 27px;
     border-top-left-radius: 27px;
@@ -79,6 +87,29 @@ article{
     display: flex;
     justify-content: center;
     align-items: center;
+}
+
+#googleLogin {
+    border: none;
+    outline: none;
+    /* background-image: url("https://developers.google.com/identity/images/btn_google_signin_light_normal_web.png?hl=ko"); */
+    background: none;
+    cursor: pointer;
+    width: 100%;
+    height: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+#googleImg{
+    border: 2px solid black;
+    width: 100%;
+    height: 100%;
+    border-top-right-radius: 27px;
+    border-bottom-right-radius: 27px;
+    border-top-left-radius: 27px;
+    border-bottom-left-radius: 27px;
 }
 
 p{

@@ -1,14 +1,16 @@
 extends sign
 
 block content
-    form(id="loginContainer" action='/auth/login', method='post')
-        input(type="text" name="inputID" id="inputID" placeholder="아이디")
-        p(id="noteID")
-        input(type="password" name="inputPwd" id="inputPwd" placeholder="비밀번호")
-        p(id="notePwd")
-        input(type="submit" id="loginBtn" value="로그인")
-        p(id="noteLogin") #{note}
-        a(id='signUpBtn' href='http://localhost:3000/signup' role='button')
-            div 회원가입
-    form(action='/auth/google', method='get')
-        input(type="submit" value="google")
+    div(id="loginContainer")
+        form(id="localLoginArea" action='/auth/login', method='post')
+            input(type="text" name="inputID" id="inputID" placeholder="아이디")
+            p(id="noteID")
+            input(type="password" name="inputPwd" id="inputPwd" placeholder="비밀번호")
+            p(id="notePwd")
+            input(type="submit" id="loginBtn" value="로그인")
+            p(id="noteLogin") #{note}
+            a(id='signUpBtn' href='http://localhost:3000/signup' role='button')
+                div 회원가입
+        form(id="googleLoginArea" action='/auth/google', method='get')
+            button(id="googleLogin" type="submit" value="google")
+                img(src='https://developers.google.com/identity/images/btn_google_signin_light_normal_web.png?hl=ko' id="googleImg")

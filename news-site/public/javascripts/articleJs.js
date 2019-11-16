@@ -77,6 +77,8 @@ for (let i = 0; i < emotions.length; i++) {
 
 // 댓글작성
 commentSub.addEventListener('click', async (event) => {
+    if(inputComment.value === '') return alert("댓글을 작성해 주세요.");
+
     const article_id = document.URL.split('/').pop();
     const response = await fetch('/article/comment', {
         method: 'POST',
@@ -90,7 +92,7 @@ commentSub.addEventListener('click', async (event) => {
     inputComment.value = '';
     comments.innerHTML = '';
     updatedCommentsObject.forEach(comment => {
-        createComment({displayName: comment.displayName, createdAt: comment.displayName, content: comment.content});
+        createComment({displayName: comment.displayName, createdAt: comment.createdAt, content: comment.content});
     });
 
 })

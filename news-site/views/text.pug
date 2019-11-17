@@ -1,30 +1,31 @@
 extends userPageRoof
 
 block content
-  form(id="newText" action='/text/write', method='post' enctype="multipart/form-data")
-      table
-          tr
-              th 제목
-              td
-                  input(type="text" name="title" id="title" placeholder="제목")
-          tr
-              th 테마
-              td 
-                select(name="thema")
-                  option(value="politics") 정치
-                  option(value="economy") 경제
-                  option(value="IT") IT
-                  option(value="life") 생활
-                  option(value="world") 세계
-          tr
-              th 이미지파일
-              td
-                  input(type="file" name="image")
-          tr
-              th 내용
-              td
-                  textarea(cols=10 name="content" placeholder="내용" )
-          tr
-              td
-                  input(type="button" id="cancel" value="취소")
-                  input(type="submit" value="저장")
+  article
+    form(id="newText" action='/text/write', method='post' enctype="multipart/form-data")
+        table
+            tr
+                th 제목
+                td
+                    input(type="text" name="title" id="title" placeholder="제목")
+            tr
+                th 테마
+                td 
+                  select(name="thema")
+                    option(value="politics") 정치
+                    option(value="economy") 경제
+                    option(value="IT") IT
+                    option(value="life") 생활
+                    option(value="world") 세계
+            tr
+                th 이미지파일
+                td
+                    input(type="file" name="image")
+            tr
+                th 내용
+                td
+                    textarea(cols=10 name="content" placeholder="내용" )
+            tr
+                td
+                    input(type="button" id="cancel" value="취소")
+                    input(type="submit" value="저장")

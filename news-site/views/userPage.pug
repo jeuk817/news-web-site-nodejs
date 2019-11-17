@@ -1,8 +1,11 @@
 extends userPageRoof
 
 block content
-  a(href='http://localhost:3000/text' role='button')
-    div 기사쓰기
-  //- input(type="button" id="withdrawal" value="회원탈퇴")
-  div(id="withdrawal") 회원탈퇴
-  script(src="/javascripts/userPageJs.js")
+  article(id="menu")
+    a(href='http://localhost:3000/text' role='button')
+      div 기사쓰기
+    //- a(href='http://localhost:3000/user/userArticles' role='button')
+    //-   div 내가 쓴 기사
+    div(id="writtenArticles") 내가 쓴 기사
+    div(id="withdrawal") 회원탈퇴
+    script(src="/javascripts/userPageJs.js")

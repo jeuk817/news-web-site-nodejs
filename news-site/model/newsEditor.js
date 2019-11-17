@@ -102,6 +102,15 @@ class NewsEditor {
             return err;
         }
     }
+
+    async getUserArticles(reporterName){
+        try{
+            const articles = await articleCollection.find({reporterName});
+            return articles;
+        } catch(err){
+            return err;
+        }
+    }
 }
 
 

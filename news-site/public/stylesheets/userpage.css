@@ -37,6 +37,7 @@ a {
     font-weight: bold;
 }
 
-#withdrawal{
+#withdrawal,
+#writtenArticles{
     cursor: pointer;
 }

@@ -61,7 +61,7 @@ router.post('/login', isNotLoggedIn, async (req, res, next) => {
           _id: exUser._id,
           displayName: exUser.displayName,
         }, process.env.JWT_SECRET, {
-            expiresIn: '10m',
+            expiresIn: '20m',
             issuer: 'circus'
           });
         res.cookie('token', token, {

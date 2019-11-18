@@ -105,7 +105,7 @@ class NewsEditor {
 
     async getUserArticles(reporterName){
         try{
-            const articles = await articleCollection.find({reporterName});
+            const articles = await articleCollection.find({reporterName}).lean();
             return articles;
         } catch(err){
             return err;

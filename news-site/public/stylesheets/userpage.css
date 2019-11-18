@@ -41,3 +41,26 @@ a {
 #writtenArticles{
     cursor: pointer;
 }
+
+article{
+    display: flex;
+    justify-content: flex-start;
+}
+
+#menu{
+    border: 2px solid yellow;
+    width: 20%;
+    height: 100vh;
+    font-size: 2rem;
+    padding: 20px;
+}
+
+#content{
+    border: 2px solid blue;
+    width: 80%;
+    padding: 20px;
+}
+
+#userArticles{
+    font-size: 2rem;
+}

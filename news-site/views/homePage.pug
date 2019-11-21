@@ -3,7 +3,7 @@ extends homePageRoof
 block content
     article
         div(id="mainArticle")   
-            a(href=`http://localhost:3000/article/${mainArticle._id}` id="mainArticleLink")
+            a(href=`/article/${mainArticle._id}` id="mainArticleLink")
                 div(id="mainPicture")
                     img(src=`${mainArticle.pictureUrl}`)
                 if mainArticle.title.length > 25
@@ -15,7 +15,7 @@ block content
             div(class="thema") 정치
                 br
                 each article in articles.politics
-                    a(href=`http://localhost:3000/article/${article._id}`)
+                    a(href=`/article/${article._id}`)
                         if article.title.length > 25
                             span(class="articleTitle") #{article.title.substring(0,25)}...
                             span(class="reporterName") [#{article.reporterId.displayName} 기자]
@@ -26,7 +26,7 @@ block content
             div(class="thema") 경제
                 br
                 each article in articles.economy
-                    a(href=`http://localhost:3000/article/${article._id}`)
+                    a(href=`/article/${article._id}`)
                         if article.title.length > 25
                             span(class="articleTitle") #{article.title.substring(0,25)}...
                             span(class="reporterName") [#{article.reporterId.displayName} 기자]
@@ -37,7 +37,7 @@ block content
             div(class="thema") IT
                 br
                 each article in articles.IT
-                    a(href=`http://localhost:3000/article/${article._id}`)
+                    a(href=`/article/${article._id}`)
                         if article.title.length > 25
                             span(class="articleTitle") #{article.title.substring(0,25)}...
                             span(class="reporterName") [#{article.reporterId.displayName} 기자]
@@ -48,7 +48,7 @@ block content
             div(class="thema") 생활
                 br
                 each article in articles.life
-                    a(href=`http://localhost:3000/article/${article._id}`)
+                    a(href=`/article/${article._id}`)
                         if article.title.length > 25
                             span(class="articleTitle") #{article.title.substring(0,25)}...
                             span(class="reporterName") [#{article.reporterId.displayName} 기자]
@@ -59,7 +59,7 @@ block content
             div(class="thema") 세계
                 br
                 each article in articles.world
-                    a(href=`http://localhost:3000/article/${article._id}`)
+                    a(href=`/article/${article._id}`)
                         if article.title.length > 25
                             span(class="articleTitle") #{article.title.substring(0,25)}...
                             span(class="reporterName") [#{article.reporterId.displayName} 기자]

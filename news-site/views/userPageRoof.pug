@@ -6,11 +6,11 @@ html
   body
     header
       div(id='areaRoof')
-        a(href='http://localhost:3000/user' role='button')
+        a(href='/user' role='button')
           div #{user.displayName}님
-        a(href='http://localhost:3000/auth/logout')
+        a(href='/auth/logout')
           div 로그아웃
       div(id='areaLogo')
-        a(href="http://localhost:3000")
+        a(href="/")
           h1 Circus News
     block content

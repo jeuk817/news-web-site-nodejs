@@ -9,7 +9,7 @@ block content
             p(id="notePwd")
             input(type="submit" id="loginBtn" value="로그인")
             p(id="noteLogin") #{note}
-            a(id='signUpBtn' href='http://localhost:3000/signup' role='button')
+            a(id='signUpBtn' href='/signup' role='button')
                 div 회원가입
         form(id="googleLoginArea" action='/auth/google', method='get')
             button(id="googleLogin" type="submit" value="google")

@@ -3,8 +3,8 @@ const writtenArticles = document.getElementById('writtenArticles');
 const menu = document.getElementById('menu');
 const content = document.getElementById('content');
 
-function createDiv({className, id, text}){
-    let div = document.createElement("div");
+function createElementFunc({tag='div', className='', id='', text=''}){
+    let div = document.createElement(tag);
     div.className = className;
     div.id = id;
     let textnode = document.createTextNode(text);
@@ -13,10 +13,15 @@ function createDiv({className, id, text}){
 }
 
 function createArticleList(articles){
-    const container = createDiv({id : "userArticles", text:''});
+    const container = createElementFunc({tag: 'div', id : "userArticlesContainer"});
     articles.forEach((article,i) => {
-        const _article = createDiv({id: 'article' + 1 + i, text: article.title});
-        container.appendChild(_article);
+        const a = document.createElement('a');
+        a.href = `article/${article._id}`;
+        const _article = createElementFunc({tag: 'span',className:'userArticles',id: 'article' + (1 + i), text: article.title});
+        const br = document.createElement('br');
+        a.appendChild(_article);
+        container.appendChild(a);
+        container.appendChild(br);
     });
     content.appendChild(container);
 }
@@ -42,9 +47,7 @@ writtenArticles.addEventListener('click', async (event) => {
         return window.location.href = response.url;
     }
     const articles = await response.json();
-    console.log(articles);
     content.innerHTML = '';
     createArticleList(articles);
 })
 
-const aaa = "hi man";

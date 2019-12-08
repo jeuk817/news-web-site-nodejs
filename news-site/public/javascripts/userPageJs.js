@@ -31,10 +31,11 @@ function createArticleList(articles){
     content.appendChild(container);
 }
 
+// action="/text/write" method="post" enctype="multipart/form-data"
 // 기사를 입력할 틀을 생성하는 함수
-function createTextFrame(){
+function createTextFrame({formId, buttonValue}){
     const textFrame = `
-    <form id="newText" action="/text/write" method="post" enctype="multipart/form-data">
+    <form id="${formId}">
         <table>
             <tbody>
                 <tr>
@@ -67,15 +68,11 @@ function createTextFrame(){
                         <textarea cols="10" name="content" placeholder="내용"></textarea>
                     </td>
                 </tr>
-                <tr>
-                    <td>
-                        <input type="button" id="cancel" value="취소">
-                        <input type="submit" value="저장">
-                    </td>
-                </tr>
             </tbody>
         </table>
-    </from>
+    </form>
+    <input type="button" id="cancel" value="cancel">
+    <input type="button" id="${buttonValue}" value="${buttonValue}">
     `
     content.innerHTML = '';
     content.innerHTML = textFrame;
@@ -83,7 +80,19 @@ function createTextFrame(){
 
 // '기사쓰기' 클릭 시 실행
 writeArticle.addEventListener('click', (event) => {
-    createTextFrame();
+    createTextFrame({formId:'newText', buttonValue:'issue'});
+    const issueBtn = document.getElementById('issue');
+    issueBtn.addEventListener('click', async (ev) => {
+        const formData = new FormData(document.getElementById('newText'));
+        const response = await fetch('/text/write', {
+            method: 'POST',
+            body: formData
+        });
+        if(response.redirected){
+            alert('기사가 개제되었습니다.')
+            content.innerHTML = '';
+        }
+    })
 })
 
 // 회원탈퇴

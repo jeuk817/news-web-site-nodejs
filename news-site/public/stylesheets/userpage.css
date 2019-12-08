@@ -37,6 +37,7 @@ a {
     font-weight: bold;
 }
 
+#writeArticle,
 #withdrawal,
 #writtenArticles{
     cursor: pointer;

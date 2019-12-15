@@ -14,14 +14,30 @@ function createElementFunc({tag='div', className='', id='', text=''}){
     return element;
 }
 
+function setEditeBtns(){
+    const editeBtns = document.getElementsByClassName("editBtns");
+    for(let i = 0; i < editBtns.length; i++){
+        editeBtns[i].addEventListener('click', async (event) => {
+            try {
+                const response = await fetch('/article/targetToEdit/', { method :'GET' });
+
+            } catch(err) {
+                alert(err);
+                window.location.href = '/';
+            }
+        })
+    }
+
+}
+
 // 자신의 쓴 기사 리스트들을 표시하는 함수
 function createArticleList(articles){
     const container = createElementFunc({tag: 'div', id : "userArticlesContainer"});
     articles.forEach((article,i) => {
         const anchor = document.createElement('a');
-        anchor.href = `article/${article._id}`;
+        anchor.href = `/article/read/${article._id}`;
         const _article = createElementFunc({tag: 'span',className:'userArticles',id: 'article' + (1 + i), text: article.title});
-        const editBtn = createElementFunc({tag: 'button', className: 'editBtns', text: '수정'});
+        const editBtn = createElementFunc({tag: 'button', className: 'editBtns', text: '수정', id: article._id});
         const br = document.createElement('br');
         anchor.appendChild(_article);
         container.appendChild(anchor);

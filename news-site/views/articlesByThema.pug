@@ -3,7 +3,7 @@ extends homePageRoof
 block content
     article
         div(id="mainArticle")   
-            a(href=`/article/${mainArticle._id}` id="mainArticleLink")
+            a(href=`/article/read/${mainArticle._id}` id="mainArticleLink")
                 div(id="mainPicture")
                     img(src=`${mainArticle.pictureUrl}`)
                 if mainArticle.title.length > 25
@@ -15,7 +15,7 @@ block content
             div(class="thema") 
                 br
                 each article in articles
-                    a(href=`/article/${article._id}`)
+                    a(href=`/article/read/${article._id}`)
                         if article.title.length > 25
                             span(class="articleTitle") #{article.title.substring(0,25)}...
                             span(class="reporterName") [#{article.reporterId.displayName} 기자]

@@ -15,15 +15,14 @@ function createElementFunc({tag='div', className='', id='', text=''}){
 }
 
 function setEditeBtns(){
-    const editeBtns = document.getElementsByClassName("editBtns");
+    const editBtns = document.getElementsByClassName("editBtns");
     for(let i = 0; i < editBtns.length; i++){
-        editeBtns[i].addEventListener('click', async (event) => {
+        editBtns[i].addEventListener('click', async (event) => {
             try {
-                const response = await fetch('/article/targetToEdit/', { method :'GET' });
-
+                const response = await fetch(`/article/targetToEdit/${event.target.id}`, { method :'GET', redirect: "follow" });
+                const article = await response.json();
             } catch(err) {
-                alert(err);
-                window.location.href = '/';
+                console.error(err);
             }
         })
     }
@@ -45,11 +44,13 @@ function createArticleList(articles){
         container.appendChild(br);
     });
     content.appendChild(container);
+    setEditeBtns();
 }
+
 
 // action="/text/write" method="post" enctype="multipart/form-data"
 // 기사를 입력할 틀을 생성하는 함수
-function createTextFrame({formId, buttonValue}){
+function createTextFrame({formId, buttonValue, title, thema, writtenContent}){
     const textFrame = `
     <form id="${formId}">
         <table>
@@ -63,7 +64,7 @@ function createTextFrame({formId, buttonValue}){
                 <tr>
                     <th>테마</th>
                     <td>
-                        <select name="thema">
+                        <select name="thema" id="thema">
                             <option value="politics">정치</option>
                             <option value="economy">경제</option>
                             <option value="IT">IT</option>
@@ -75,13 +76,13 @@ function createTextFrame({formId, buttonValue}){
                 <tr>
                     <th>이미지파일</th>
                     <td>
-                        <input type="file" name="image">
+                        <input type="file" name="image" accept="image/png, image/jpeg" id="fi">
                     </td>
                 </tr>
                 <tr>
                     <th>내용</th>
                     <td>
-                        <textarea cols="10" name="content" placeholder="내용"></textarea>
+                        <textarea cols="10" name="content" placeholder="내용" id="contentArea"></textarea>
                     </td>
                 </tr>
             </tbody>
@@ -92,6 +93,9 @@ function createTextFrame({formId, buttonValue}){
     `
     content.innerHTML = '';
     content.innerHTML = textFrame;
+    document.getElementById('title').value = title || '';
+    document.getElementById('thema').value = thema || 'politics';
+    document.getElementById('contentArea').value = writtenContent || '';
 }
 
 // '기사쓰기' 클릭 시 실행

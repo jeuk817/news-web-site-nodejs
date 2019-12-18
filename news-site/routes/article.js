@@ -20,7 +20,7 @@ router.get('/read/:id', loginConfig, async (req, res, next) => {
 router.get('/targetToEdit/:id',isLoggedIn, async (req, res, next) => {
     try {
         const article = await newsEditor.getArticleById(req.params.id);
-        throw new Error('에러발생')
+        // throw new Error('에러발생')
         res.json(article);
     } catch (err) {
         next(err);

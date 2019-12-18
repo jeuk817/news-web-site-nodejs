@@ -5,15 +5,18 @@ const content = document.getElementById('content');
 const writeArticle = document.getElementById('writeArticle');
 
 // element를 만드는 함수
-function createElementFunc({tag='div', className='', id='', text=''}){
+function createElementFunc({tag='div', className='', id='', text}){
     let element = document.createElement(tag);
     element.className = className;
     element.id = id;
-    let textnode = document.createTextNode(text);
-    element.appendChild(textnode);
+    if(text) {
+        let textnode = document.createTextNode(text);
+        element.appendChild(textnode);
+    }
     return element;
 }
 
+// 기사를 수정할 수 있는 폼을 불러오는 함수
 function setEditeBtns(){
     const editBtns = document.getElementsByClassName("editBtns");
     for(let i = 0; i < editBtns.length; i++){
@@ -21,6 +24,7 @@ function setEditeBtns(){
             try {
                 const response = await fetch(`/article/targetToEdit/${event.target.id}`, { method :'GET', redirect: "follow" });
                 const article = await response.json();
+                createTextFrame({formId:'editedText', title: article.title, thema: article.thema, imageURL: article.pictureUrl, writtenContent: article.content, buttonValue: 'edit'});
             } catch(err) {
                 console.error(err);
             }
@@ -50,7 +54,7 @@ function createArticleList(articles){
 
 // action="/text/write" method="post" enctype="multipart/form-data"
 // 기사를 입력할 틀을 생성하는 함수
-function createTextFrame({formId, buttonValue, title, thema, writtenContent}){
+function createTextFrame({formId, buttonValue, title, thema, writtenContent, imageURL}){
     const textFrame = `
     <form id="${formId}">
         <table>
@@ -75,8 +79,8 @@ function createTextFrame({formId, buttonValue, title, thema, writtenContent}){
                 </tr>
                 <tr>
                     <th>이미지파일</th>
-                    <td>
-                        <input type="file" name="image" accept="image/png, image/jpeg" id="fi">
+                    <td id="imageContainer">
+                        <input type="file" name="image" accept="image/png, image/jpeg">
                     </td>
                 </tr>
                 <tr>
@@ -96,6 +100,14 @@ function createTextFrame({formId, buttonValue, title, thema, writtenContent}){
     document.getElementById('title').value = title || '';
     document.getElementById('thema').value = thema || 'politics';
     document.getElementById('contentArea').value = writtenContent || '';
+    const imageContainer = document.getElementById('imageContainer');
+    if(writtenContent) {
+        const originalImage = createElementFunc({tag:'td', id:'originalImage', text: "기존이미지 : " + imageURL});
+        imageContainer.insertAdjacentElement('afterend', originalImage);
+        imageContainer.onchange = function(){
+            originalImage.classList.add('displayNone');
+        }
+    }
 }
 
 // '기사쓰기' 클릭 시 실행

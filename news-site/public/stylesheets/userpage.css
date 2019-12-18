@@ -65,3 +65,7 @@ article{
 #userArticlesContainer{
     font-size: 2rem;
 }
+
+.displayNone{
+    display: none;
+}

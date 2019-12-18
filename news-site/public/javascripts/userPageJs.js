@@ -24,7 +24,9 @@ function setEditeBtns(){
             try {
                 const response = await fetch(`/article/targetToEdit/${event.target.id}`, { method :'GET', redirect: "follow" });
                 const article = await response.json();
-                createTextFrame({formId:'editedText', title: article.title, thema: article.thema, imageURL: article.pictureUrl, writtenContent: article.content, buttonValue: 'edit'});
+                
+                createTextFrame({formId:'editedText', buttonValue: 'edit'});
+                coverWithArticle(article);
             } catch(err) {
                 console.error(err);
             }
@@ -97,16 +99,17 @@ function createTextFrame({formId, buttonValue, title, thema, writtenContent, ima
     `
     content.innerHTML = '';
     content.innerHTML = textFrame;
-    document.getElementById('title').value = title || '';
-    document.getElementById('thema').value = thema || 'politics';
-    document.getElementById('contentArea').value = writtenContent || '';
+}
+
+function coverWithArticle(article){
+    document.getElementById('title').value = article.title || '';
+    document.getElementById('thema').value = article.thema || 'politics';
+    document.getElementById('contentArea').value = article.content || '';
     const imageContainer = document.getElementById('imageContainer');
-    if(writtenContent) {
-        const originalImage = createElementFunc({tag:'td', id:'originalImage', text: "기존이미지 : " + imageURL});
-        imageContainer.insertAdjacentElement('afterend', originalImage);
-        imageContainer.onchange = function(){
-            originalImage.classList.add('displayNone');
-        }
+    const originalImage = createElementFunc({tag:'td', id:'originalImage', text: "기존이미지 : " + article.pictureUrl});
+    imageContainer.insertAdjacentElement('afterend', originalImage);
+    imageContainer.onchange = function(){
+        originalImage.classList.add('displayNone');
     }
 }
 

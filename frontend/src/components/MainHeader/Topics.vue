@@ -38,7 +38,6 @@ export default {
 .mainHeaderTopics{
   display: grid;
   grid-template-columns: repeat(5, 1fr);
-  border-bottom: 2px solid rgb(110, 173, 245);
 }
 
 .topicBtn{

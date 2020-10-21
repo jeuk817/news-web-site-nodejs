@@ -2,48 +2,49 @@
   <div>
     <v-app-bar
       absolute
-      color="primary"
-      dark
+      color="white"
       inverted-scroll
-      scroll-threshold=200
-      id="fixedBar"
+      scroll-threshold=150
+      id="mainAppBar"
     >
       <v-container class="mainWidth mainBar">
-        <!-- <v-spacer></v-spacer> -->
         <div>
           <v-app-bar-nav-icon></v-app-bar-nav-icon>
           <v-btn icon>
             <v-icon>mdi-magnify</v-icon>
           </v-btn>
         </div>
-        <v-toolbar-title>정치</v-toolbar-title>
-        <v-toolbar-title>경제</v-toolbar-title>
-        <v-toolbar-title>사회</v-toolbar-title>
-        <v-toolbar-title>IT</v-toolbar-title>
-        <v-toolbar-title>세계</v-toolbar-title>
+        <Topics/>
       </v-container>
     </v-app-bar>
   </div>
 </template>
 
 <script>
-export default {
+import Topics from './MainHeader/Topics'
 
+export default {
+  components: {
+    Topics
+  }
 }
 </script>
 
 <style scoped>
-#fixedBar{
+#mainAppBar{
   position: fixed;
+  display: grid;
+  grid-template-columns: 1fr;
+  justify-items: center;
 }
 .mainWidth{
-  margin: auto;
-  padding: 0 3%;
-  max-width: 1200px;
+  padding: 0;
+  margin: 0;
+  width: 1200px;
 }
 .mainBar{
   display: grid;
-  grid-template-columns: repeat(6, 1fr);
+  grid-template-columns: 1fr 5fr;
   align-items: center;
 }
 </style>

@@ -30,9 +30,8 @@ export default {
 
 <style scoped>
 .mainHeader{
-  /* border: 2px solid blue; */
   width: 100%;
-  /* max-height: 135px; */
+  border-bottom: 2px solid rgb(110, 173, 245);
 }
 
 .mainHeaderBody{

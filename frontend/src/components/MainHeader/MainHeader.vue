@@ -2,7 +2,7 @@
   <div class="mainHeader">
     <MenuBar/>
     <div class="mainHeaderBody">
-      <div>
+      <div class="mainHeaderBodyDate">
         2020년 10월 21일 수요일
       </div>
       <div class="siteLogo">
@@ -12,16 +12,18 @@
         jack's web app
       </div>
     </div>
-    asdf
+    <Topics/>
   </div>
 </template>
 
 <script>
 import MenuBar from './MenuBar'
+import Topics from './Topics'
 
 export default {
   components: {
-    MenuBar
+    MenuBar,
+    Topics
   }
 }
 </script>
@@ -30,23 +32,31 @@ export default {
 .mainHeader{
   border: 2px solid blue;
   width: 100%;
-  max-height: 135px;
+  /* max-height: 135px; */
 }
 
 .mainHeaderBody{
   display: grid;
   grid-template-columns: 1fr 1fr 1fr;
-  align-items: end;
   border-bottom: 1px solid rgb(110, 173, 245);
+  padding: 0 5px;
+}
+
+.mainHeaderBodyDate{
+  display: grid;
+  align-content: end;
 }
 
 .siteLogo{
   font-size: 48px;
+  display: grid;
+  align-content: end;
+  justify-content: center;
 }
 
-.jack{
+#jack{
   display: grid;
-  align-items: end;
-  justify-items: end;
+  align-content: end;
+  justify-content: end;
 }
 </style>

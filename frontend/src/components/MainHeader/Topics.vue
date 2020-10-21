@@ -1,20 +1,30 @@
 <template>
-  <div>
-    <v-btn text>
-      정치
-    </v-btn>
-    <v-btn text>
-      경제
-    </v-btn>
-    <v-btn text>
-      사회
-    </v-btn>
-    <v-btn text>
-      IT
-    </v-btn>
-    <v-btn text>
-      세계
-    </v-btn>
+  <div class="mainHeaderTopics">
+    <div class="topicBtn">
+      <v-btn text>
+        정치
+      </v-btn>
+    </div>
+    <div class="topicBtn">
+      <v-btn text>
+        경제
+      </v-btn>
+    </div>
+    <div class="topicBtn">
+      <v-btn text>
+        사회
+      </v-btn>
+    </div>
+    <div class="topicBtn">
+      <v-btn text>
+        IT
+      </v-btn>
+    </div>
+    <div class="topicBtn">
+      <v-btn text>
+        세계
+      </v-btn>
+    </div>
   </div>
 </template>
 
@@ -23,3 +33,16 @@ export default {
 
 }
 </script>
+
+<style scoped>
+.mainHeaderTopics{
+  display: grid;
+  grid-template-columns: repeat(5, 1fr);
+  border-bottom: 2px solid rgb(110, 173, 245);
+}
+
+.topicBtn{
+  display: grid;
+  justify-content: center;
+}
+</style>

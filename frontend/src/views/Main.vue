@@ -26,7 +26,7 @@ export default {
 
 <style scoped>
 .bodyBox {
-  border: 2px solid red;
+  /* border: 2px solid red; */
   max-width: 1200px;
   margin: 0 auto;
 }
